@@ -11,14 +11,14 @@ def get_categorical_features():
     Return a list of default categorical features.
     """
     return [
-        "workclass",
+       " workclass",
         "education",
-        "marital-status",
-        "occupation",
-        "relationship",
-        "race",
-        "sex",
-        "native-country",
+        " marital-status",
+        " occupation",
+        " relationship",
+        " race",
+        " sex",
+        " native-country",
     ]
 
 def handle_features(X, categorical_features):
@@ -115,5 +115,4 @@ def process_data(X, categorical_features=[], label=None, training=True, encoder=
     """
     X, y = handle_label(X, label)
     X_categorical, X_continuous, categorical_features = handle_features(X, categorical_features)
-    X = np.concatenate([X_continuous, X_categorical], axis=1)
-    return transform_features(X, training, encoder, lb, y)
+    return transform_features(X_categorical, X_continuous, training, encoder, lb, y)
