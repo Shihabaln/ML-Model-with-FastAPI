@@ -5,9 +5,9 @@ import argparse
 import logging
 import pandas as pd
 import joblib
-from data import get_categorical_features, process_data
+from data_1 import process_data ,get_categorical_features
 from sklearn.model_selection import train_test_split
-from model import compute_model_metrics
+from model_1 import compute_model_metrics
 
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")

@@ -1,0 +1,36 @@
+name: CI/CD pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  TestAndDeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+      - name: Pull data from Google Drive
+        run: dvc pull
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+      - name: Sync model to deploy directory
+        run: rsync -av model/* deploy --include="*.joblib" --exclude="*.dvc" --exclude="*.txt"
+      - name: Run Flake8
+        run: flake8
+      - name: Run pytest
+        run: pip install -e . && pytest .
+      - name: Deploy to production
+        uses: Shihabaln/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.SERVICE_ID }} # Can be found as part of the Deploy Hook
+          api-key: ${{ secrets.RENDER_TOKEN }} # Create your API key in Render Dashboard > Account Settings
