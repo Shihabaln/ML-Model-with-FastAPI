@@ -16,13 +16,12 @@ def test_client():
         yield client
 
 
-
 # Class definition to structure data
 class MockUser(BaseModel):
     age: int
     hours_per_week: int
 
-# Class definition to structure data
+    # Class definition to structure data
     workclass: str
     education: str
     marital_status: str
@@ -33,13 +32,11 @@ class MockUser(BaseModel):
     native_country: str
 
 
-
 # Function definition
 def test_get(test_client):
     r = test_client.get("/")
     assert r.status_code == 200
     assert r.json() == {"message": "Census Project  - Welcome to my page!"}
-
 
 
 # Function definition
@@ -48,46 +45,42 @@ def test_get_failed(test_client):
     assert r.status_code != 200
 
 
-
 # Function definition
 def test_predict_1(test_client):
     user_input = MockUser(
         age=32,
         hours_per_week=60,
-        workclass='Private',
-        education='Some-college',
-        marital_status='Married-civ-spouse',
-        occupation='Exec-managerial',
-        relationship='Husband',
-        race='White',
-        sex='Male',
-        native_country='United-States'
+        workclass="Private",
+        education="Some-college",
+        marital_status="Married-civ-spouse",
+        occupation="Exec-managerial",
+        relationship="Husband",
+        race="White",
+        sex="Male",
+        native_country="United-States",
     )
     response = test_client.post("/", json=user_input.dict())
     assert response.status_code == 200
-    assert response.json()['class_name'] == " <=50K"
-
+    assert response.json()["class_name"] == " <=50K"
 
 
 # Function definition
 def test_predict_2(test_client):
-
     user_input = MockUser(
         age=19,
         hours_per_week=40,
-        workclass='Private',
-        education='HS-grad',
-        marital_status='Never-married',
-        occupation='Other-service',
-        relationship='Own-child',
-        race='Black',
-        sex='Male',
-        native_country='United-States'
+        workclass="Private",
+        education="HS-grad",
+        marital_status="Never-married",
+        occupation="Other-service",
+        relationship="Own-child",
+        race="Black",
+        sex="Male",
+        native_country="United-States",
     )
     response = test_client.post("/", json=user_input.dict())
     assert response.status_code == 200
-    assert response.json()['class_name'] == " <=50K"
-
+    assert response.json()["class_name"] == " <=50K"
 
 
 # Function definition
@@ -97,14 +90,14 @@ def test_predict_3(test_client):
     user_input = MockUser(
         age=40,
         hours_per_week=40,
-        workclass='Private',
-        education='Bachelors',
-        marital_status='Married-civ-spouse',
-        occupation='Exec-managerial',
-        relationship='Husband',
-        race='White',
-        sex='Male',
-        native_country='United-States'
+        workclass="Private",
+        education="Bachelors",
+        marital_status="Married-civ-spouse",
+        occupation="Exec-managerial",
+        relationship="Husband",
+        race="White",
+        sex="Male",
+        native_country="United-States",
     )
 
     # Ensure the response is successful
@@ -113,8 +106,7 @@ def test_predict_3(test_client):
 
     # Ensure the response has expected keys
     response_json = response.json()
-    assert set(response_json.keys()) == {'prediction', 'class_name', 'success'}
-
+    assert set(response_json.keys()) == {"prediction", "class_name", "success"}
 
 
 # Function definition
@@ -122,14 +114,14 @@ def test_predict_failed(test_client):
     user_input = MockUser(
         age=40,
         hours_per_week=40,
-        workclass='Private',
-        education='Bachelors',
-        marital_status='ERROR',
-        occupation='ERROR',
-        relationship='Husband',
-        race='White',
-        sex='Male',
-        native_country='United-States'
+        workclass="Private",
+        education="Bachelors",
+        marital_status="ERROR",
+        occupation="ERROR",
+        relationship="Husband",
+        race="White",
+        sex="Male",
+        native_country="United-States",
     )
     r = test_client.post("/", json=user_input.dict())
     assert r.status_code == 422

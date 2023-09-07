@@ -1,4 +1,3 @@
-
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 import logging
@@ -6,12 +5,13 @@ import logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
 
+
 def get_categorical_features():
     """
     Return a list of default categorical features.
     """
     return [
-       " workclass",
+        " workclass",
         "education",
         " marital-status",
         " occupation",
@@ -21,14 +21,15 @@ def get_categorical_features():
         " native-country",
     ]
 
+
 def handle_features(X, categorical_features):
     """
     Handle categorical and continuous features.
-    
+
     Parameters:
     X (DataFrame): The data frame containing features.
     categorical_features (list): The list of categorical feature names.
-    
+
     Returns:
     X_categorical (array): Array of categorical features.
     X_continuous (DataFrame): DataFrame of continuous features.
@@ -40,14 +41,15 @@ def handle_features(X, categorical_features):
     X_continuous = X.drop(columns=categorical_features)
     return X_categorical, X_continuous, categorical_features
 
+
 def handle_label(X, label):
     """
     Handle label data.
-    
+
     Parameters:
     X (DataFrame): The data frame containing features and possibly labels.
     label (str): The name of the label column.
-    
+
     Returns:
     X (DataFrame): The data frame without label column.
     y (array or DataFrame): The label data.
@@ -59,10 +61,11 @@ def handle_label(X, label):
         y = np.array([])
     return X, y
 
+
 def transform_features(X_categorical, X_continuous, training, encoder, lb, y):
     """
     Transform features and labels.
-    
+
     Parameters:
     X_categorical (array): Array of categorical features.
     X_continuous (DataFrame): DataFrame of continuous features.
@@ -70,7 +73,7 @@ def transform_features(X_categorical, X_continuous, training, encoder, lb, y):
     encoder (OneHotEncoder): Pre-trained OneHotEncoder (used if training=False).
     lb (LabelBinarizer): Pre-trained LabelBinarizer (used if training=False).
     y (array or DataFrame): The label data.
-    
+
     Returns:
     X (array): Transformed feature data.
     y (array): Transformed label data.
@@ -91,14 +94,17 @@ def transform_features(X_categorical, X_continuous, training, encoder, lb, y):
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
 
-def process_data(X, categorical_features=[], label=None, training=True, encoder=None, lb=None):
+
+def process_data(
+    X, categorical_features=[], label=None, training=True, encoder=None, lb=None
+):
     """
     Process the data used in the machine learning pipeline.
-    
+
     Processes the data using one hot encoding for the categorical features and a
     label binarizer for the labels. This can be used in either training or
     inference/validation.
-    
+
     Parameters:
     X (DataFrame): The data frame containing features and possibly labels.
     categorical_features (list): The list of categorical feature names.
@@ -106,7 +112,7 @@ def process_data(X, categorical_features=[], label=None, training=True, encoder=
     training (bool): Flag to indicate if it's training phase.
     encoder (OneHotEncoder): Pre-trained OneHotEncoder (used if training=False).
     lb (LabelBinarizer): Pre-trained LabelBinarizer (used if training=False).
-    
+
     Returns:
     X (array): Transformed feature data.
     y (array): Transformed label data.
@@ -114,5 +120,7 @@ def process_data(X, categorical_features=[], label=None, training=True, encoder=
     lb (LabelBinarizer): Fitted or pre-trained LabelBinarizer.
     """
     X, y = handle_label(X, label)
-    X_categorical, X_continuous, categorical_features = handle_features(X, categorical_features)
+    X_categorical, X_continuous, categorical_features = handle_features(
+        X, categorical_features
+    )
     return transform_features(X_categorical, X_continuous, training, encoder, lb, y)

@@ -5,7 +5,7 @@ import argparse
 import logging
 import pandas as pd
 import joblib
-from data_1 import process_data ,get_categorical_features
+from data_1 import process_data, get_categorical_features
 from sklearn.model_selection import train_test_split
 from model_1 import compute_model_metrics
 
@@ -20,16 +20,26 @@ def run(
     model_path="../model/model.joblib",
     encoder_path="../model/encoder.joblib",
     lb_path="../model/lb.joblib",
-    output_slice="../model/slice_output.txt"
+    output_slice="../model/slice_output.txt",
 ):
     """The model evaluation function"""
 
     if args is not None:
-        _data_path, _model_path, _encoder_path, _lb_path, _output_slice = \
-            (args.data_path, args.model_path, args.encoder_path, args.lb_path, args.output_slice)
+        _data_path, _model_path, _encoder_path, _lb_path, _output_slice = (
+            args.data_path,
+            args.model_path,
+            args.encoder_path,
+            args.lb_path,
+            args.output_slice,
+        )
     else:
-        _data_path, _model_path, _encoder_path, _lb_path, _output_slice = \
-            (data_path, model_path, encoder_path, lb_path, output_slice)
+        _data_path, _model_path, _encoder_path, _lb_path, _output_slice = (
+            data_path,
+            model_path,
+            encoder_path,
+            lb_path,
+            output_slice,
+        )
 
     logger.info("Loading data from %s", _data_path)
     df = pd.read_csv(_data_path)
@@ -53,15 +63,25 @@ def run(
             X_test, y_test, _, _ = process_data(
                 df_temp,
                 categorical_features=get_categorical_features(),
-                label=" salary", encoder=encoder, lb=lb, training=False
+                label=" salary",
+                encoder=encoder,
+                lb=lb,
+                training=False,
             )
 
             y_preds = model.predict(X_test)
 
-            precision_score, recall_score, f1_score = compute_model_metrics(y_test, y_preds)
+            precision_score, recall_score, f1_score = compute_model_metrics(
+                y_test, y_preds
+            )
 
-            line = "[%s->%s] Precision: %s " \
-                   "Recall: %s F1: %s" % (cat, cls, precision_score, recall_score, f1_score)
+            line = "[%s->%s] Precision: %s " "Recall: %s F1: %s" % (
+                cat,
+                cls,
+                precision_score,
+                recall_score,
+                f1_score,
+            )
             logging.info(line)
             slice_values.append(line)
 
@@ -70,18 +90,26 @@ def run(
     _X_test, _y_test, _, _ = process_data(
         test,
         categorical_features=get_categorical_features(),
-        label=" salary", encoder=encoder, lb=lb, training=False
+        label=" salary",
+        encoder=encoder,
+        lb=lb,
+        training=False,
     )
     _y_preds = model.predict(_X_test)
-    _precision_score, _recall_score, _f1_score = compute_model_metrics(_y_test, _y_preds)
-    line = "[Overall Score] - Precision: %s " \
-        "Recall: %s F1: %s" % (_precision_score, _recall_score, _f1_score)
+    _precision_score, _recall_score, _f1_score = compute_model_metrics(
+        _y_test, _y_preds
+    )
+    line = "[Overall Score] - Precision: %s " "Recall: %s F1: %s" % (
+        _precision_score,
+        _recall_score,
+        _f1_score,
+    )
     logging.info(line)
     slice_values.append(line)
 
-    with open(_output_slice, 'w') as file:
+    with open(_output_slice, "w") as file:
         for slice_value in slice_values:
-            file.write(slice_value + '\n')
+            file.write(slice_value + "\n")
 
 
 if __name__ == "__main__":
@@ -94,7 +122,7 @@ if __name__ == "__main__":
         type=str,
         default="../data/prepared_census.csv",
         help="Name of the prepared data",
-        required=False
+        required=False,
     )
 
     # Add output_artifact argument to the parser with required=True
@@ -103,7 +131,7 @@ if __name__ == "__main__":
         type=str,
         default="../model/model.joblib",
         help="Name of the trained model",
-        required=False
+        required=False,
     )
 
     # Add output_artifact argument to the parser with required=True
@@ -112,7 +140,7 @@ if __name__ == "__main__":
         type=str,
         default="../model/encoder.joblib",
         help="Name of the encoder model",
-        required=False
+        required=False,
     )
 
     # Add output_artifact argument to the parser with required=True
@@ -121,7 +149,7 @@ if __name__ == "__main__":
         type=str,
         default="../model/lb.joblib",
         help="Name of the label encoder model",
-        required=False
+        required=False,
     )
     # Add output_artifact argument to the parser with required=True
     parser.add_argument(
@@ -129,7 +157,7 @@ if __name__ == "__main__":
         type=str,
         default="../model/slice_output.txt",
         help="Name of the slice output",
-        required=False
+        required=False,
     )
     # Parse the arguments using the given parser
     args = parser.parse_args()

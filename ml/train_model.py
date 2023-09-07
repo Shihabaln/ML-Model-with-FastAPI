@@ -19,16 +19,24 @@ def run(
     data_file="../data/prepared_census.csv",
     output_model="../model/model.joblib",
     output_encoder="../model/encoder.joblib",
-    output_lb="../model/lb.joblib"
+    output_lb="../model/lb.joblib",
 ):
     """Execute the model training"""
     # Optional enhancement, use K-fold cross validation instead of a train-test split.
     if args is not None:
-        _data_file, _output_model, _output_encoder, _output_lb = \
-            (args.data_file, args.output_model, args.output_encoder, args.output_lb)
+        _data_file, _output_model, _output_encoder, _output_lb = (
+            args.data_file,
+            args.output_model,
+            args.output_encoder,
+            args.output_lb,
+        )
     else:
-        _data_file, _output_model, _output_encoder, _output_lb = \
-            (data_file, output_model, output_encoder, output_lb)
+        _data_file, _output_model, _output_encoder, _output_lb = (
+            data_file,
+            output_model,
+            output_encoder,
+            output_lb,
+        )
 
     data = pd.read_csv(_data_file)
     train, _ = train_test_split(data, test_size=0.20)
@@ -69,7 +77,7 @@ if __name__ == "__main__":
         type=str,
         default="../data/prepared_census.csv",
         help="Name of the prepared data",
-        required=False
+        required=False,
     )
 
     # Add output_artifact argument to the parser with required=True
@@ -78,7 +86,7 @@ if __name__ == "__main__":
         type=str,
         default="../model/model.joblib",
         help="Name of the trained model",
-        required=False
+        required=False,
     )
 
     # Add output_artifact argument to the parser with required=True
@@ -87,7 +95,7 @@ if __name__ == "__main__":
         type=str,
         default="../model/encoder.joblib",
         help="Name of the encoder model",
-        required=False
+        required=False,
     )
 
     # Add output_artifact argument to the parser with required=True
@@ -96,7 +104,7 @@ if __name__ == "__main__":
         type=str,
         default="../model/lb.joblib",
         help="Name of the label encoder model",
-        required=False
+        required=False,
     )
     # Parse the arguments using the given parser
     args = parser.parse_args()

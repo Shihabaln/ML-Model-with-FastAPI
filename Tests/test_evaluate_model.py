@@ -13,11 +13,12 @@ from ml.model_1 import compute_model_metrics
 @pytest.fixture
 def args():
     class Args:
-        data_path = '../data/prepared_census.csv'
-        model_path = '../model/model.joblib'
-        encoder_path = '../model/encoder.joblib'
-        lb_path = '../model/lb.joblib'
-        output_slice = '../model/slice_output.txt'
+        data_path = "../data/prepared_census.csv"
+        model_path = "../model/model.joblib"
+        encoder_path = "../model/encoder.joblib"
+        lb_path = "../model/lb.joblib"
+        output_slice = "../model/slice_output.txt"
+
     return Args()
 
 
@@ -26,7 +27,7 @@ def test_run(args, val_data, cat_features):
 
     # Check that slice output file was created with expected lines.
     assert os.path.isfile(args.output_slice)
-    with open(args.output_slice, 'r') as file:
+    with open(args.output_slice, "r") as file:
         slice_lines = file.readlines()
     assert len(slice_lines) >= 81
     # number of unique combinations of categorical features
@@ -40,7 +41,10 @@ def test_run(args, val_data, cat_features):
     X_test, y_test, _, _ = process_data(
         val_data,
         categorical_features=cat_features,
-        label=" salary", encoder=encoder, lb=lb, training=False
+        label=" salary",
+        encoder=encoder,
+        lb=lb,
+        training=False,
     )
     y_preds = model.predict(X_test)
     precision_score, recall_score, f1_score = compute_model_metrics(y_test, y_preds)
