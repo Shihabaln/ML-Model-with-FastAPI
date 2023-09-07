@@ -30,7 +30,7 @@ jobs:
       - name: Run pytest
         run: pip install -e . && pytest .
       - name: Deploy to production
-        uses: Shihabaln/render-deploy-action@v0.0.8
+        uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.SERVICE_ID }} # Can be found as part of the Deploy Hook
           api-key: ${{ secrets.RENDER_TOKEN }} # Create your API key in Render Dashboard > Account Settings
