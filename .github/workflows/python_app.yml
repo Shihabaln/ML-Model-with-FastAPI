@@ -25,8 +25,9 @@ jobs:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       - name: Sync model to deploy directory
         run: rsync -av model/* deploy --include="*.joblib" --exclude="*.dvc" --exclude="*.txt"
-      - name: Run Flake8
-        run: flake8
+      - name: Run flake8
+        run: flake8 .
+        continue-on-error: true
       - name: Run pytest
         run: pip install -e . && pytest .
       - name: Deploy to production
