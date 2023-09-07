@@ -11,3 +11,4 @@ dvc
 flake8
 google-api-python-client>=2.0.2
 dvc[gdrive]
+typing-extensions
