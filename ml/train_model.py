@@ -52,7 +52,10 @@ def run(
         " native-country",
     ]
     X_train, y_train, encoder, lb = process_data(
-        X=train, categorical_features=cat_features, label=" salary", training=True
+        X=train,
+        categorical_features=cat_features,
+        label=" salary",
+        training=True,
     )
 
     logger.info("Starting training...")
@@ -62,7 +65,9 @@ def run(
     joblib.dump(encoder, _output_encoder)
     joblib.dump(lb, _output_lb)
 
-    logger.info("Save trained model %s to %s" % (trained_model.__str__, _output_model))
+    logger.info(
+        "Save trained model %s to %s" % (trained_model.__str__, _output_model)
+    )
     logger.info("Save encoder %s to %s" % (encoder.__str__, _output_encoder))
     logger.info("Save label encoder %s to %s" % (lb.__str__, _output_lb))
 

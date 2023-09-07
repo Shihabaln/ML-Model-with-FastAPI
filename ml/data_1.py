@@ -96,7 +96,12 @@ def transform_features(X_categorical, X_continuous, training, encoder, lb, y):
 
 
 def process_data(
-    X, categorical_features=[], label=None, training=True, encoder=None, lb=None
+    X,
+    categorical_features=[],
+    label=None,
+    training=True,
+    encoder=None,
+    lb=None,
 ):
     """
     Process the data used in the machine learning pipeline.
@@ -123,4 +128,6 @@ def process_data(
     X_categorical, X_continuous, categorical_features = handle_features(
         X, categorical_features
     )
-    return transform_features(X_categorical, X_continuous, training, encoder, lb, y)
+    return transform_features(
+        X_categorical, X_continuous, training, encoder, lb, y
+    )

@@ -47,5 +47,7 @@ def test_run(args, val_data, cat_features):
         training=False,
     )
     y_preds = model.predict(X_test)
-    precision_score, recall_score, f1_score = compute_model_metrics(y_test, y_preds)
+    precision_score, recall_score, f1_score = compute_model_metrics(
+        y_test, y_preds
+    )
     assert precision_score > 0.7 and recall_score > 0.7 and f1_score > 0.7

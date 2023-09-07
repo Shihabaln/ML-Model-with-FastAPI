@@ -85,9 +85,16 @@ class User(BaseModel):
         "Priv-house-serv",
     ]
     relationship: Literal[
-        "Not-in-family", "Husband", "Wife", "Own-child", "Unmarried", "Other-relative"
+        "Not-in-family",
+        "Husband",
+        "Wife",
+        "Own-child",
+        "Unmarried",
+        "Other-relative",
     ]
-    race: Literal["White", "Black", "Asian-Pac-Islander", "Amer-Indian-Eskimo", "Other"]
+    race: Literal[
+        "White", "Black", "Asian-Pac-Islander", "Amer-Indian-Eskimo", "Other"
+    ]
     sex: Literal["Male", "Female"]
     native_country: Literal[
         "United-States",

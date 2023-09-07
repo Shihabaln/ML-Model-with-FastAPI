@@ -4,7 +4,12 @@ Model steps module
 from numpy import mean, std
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import fbeta_score, precision_score, recall_score, make_scorer
+from sklearn.metrics import (
+    fbeta_score,
+    precision_score,
+    recall_score,
+    make_scorer,
+)
 import logging
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
