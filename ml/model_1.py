@@ -1,9 +1,9 @@
 """
 Model steps module
 """
-from numpy import mean, std
-from sklearn.model_selection import KFold, cross_val_score
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import GridSearchCV
+import multiprocessing
 from sklearn.metrics import (
     fbeta_score,
     precision_score,
@@ -16,41 +16,44 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
 
 
-def set_up_classifier():
-    """
-    Set up the classifier for the model training.
-
-    Returns:
-    clf (RandomForestClassifier): An instance of RandomForestClassifier.
-    """
-    return RandomForestClassifier(n_estimators=100)
 
 
 def train_model(X_train, y_train):
     """
-    Trains a machine learning model and returns the trained classifier.
+    Trains a machine learning model and returns it.
+    Use GridSearch for hyperparameter tuning and cross-validation
 
-    Parameters:
-    X_train (array): The feature data for training.
-    y_train (array): The label data for training.
-
-    Returns:
-    clf (RandomForestClassifier): The trained classifier.
+    Inputs
+    ------
+    X_train : np.array
+        Training data.
+    y_train : np.array
+        Labels.
+    Returns
+    -------
+    model
+        Trained machine learning model.
     """
-    cv = KFold(n_splits=10, shuffle=True, random_state=1)
-    # Set up classifier
-    clf = set_up_classifier()
+    parameters = {
+        'n_estimators': [10, 20, 30],
+        'max_depth': [5, 10],
+        'min_samples_split': [20, 50, 100],
+        'learning_rate': [1.0],  # 0.1,0.5,
+    }
 
-    # Perform cross-validation
-    scores = cross_val_score(
-        clf, X_train, y_train, scoring="accuracy", cv=cv, n_jobs=-1
-    )
+    njobs = multiprocessing.cpu_count() - 1
+    logging.info("Searching best hyperparameters on {} cores".format(njobs))
 
-    # Log the cross-validation results
-    logger.info("Mean Accuracy: %.3f (%.3f)" % (mean(scores), std(scores)))
+    clf = GridSearchCV(GradientBoostingClassifier(random_state=0),
+                       param_grid=parameters,
+                       cv=3,
+                       n_jobs=njobs,
+                       verbose=2,
+                       )
 
-    # Train the classifier
     clf.fit(X_train, y_train)
+    logging.info("********* Best parameters found ***********")
+    logging.info("BEST PARAMS: {}".format(clf.best_params_))
 
     return clf
 

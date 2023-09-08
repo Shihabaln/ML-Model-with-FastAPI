@@ -6,8 +6,8 @@ import joblib
 import logging
 import argparse
 
-from data import process_data
-from model import train_model
+from data_1 import process_data
+from model_1 import train_model
 from sklearn.model_selection import train_test_split
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
