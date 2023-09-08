@@ -9,6 +9,7 @@ with open(Path(BASE_DIR, "requirements.txt"), "r") as file:
 setuptools.setup(
     name="starter",
     version="0.0.0",
+    packages=['ml', 'data', 'model', 'deploy', 'starter'],
     description="Starter code.",
     author="Student",
 )
