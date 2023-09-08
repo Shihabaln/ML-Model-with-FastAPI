@@ -5,7 +5,7 @@ import logging
 from fastapi import FastAPI, HTTPException, status
 from cachetools import cached, TTLCache
 from pydantic import BaseModel
-from typing import Literal
+from typing_extensions import Literal
 from ml.data_1 import get_categorical_features, process_data
 from ml.model_1 import inference
 import pandas as pd
