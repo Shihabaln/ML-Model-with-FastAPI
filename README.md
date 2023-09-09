@@ -26,12 +26,12 @@ The processed data is stored at the specified path, while the trained model and
 other artifacts are saved to another designated path
 
 ### Tests 
- Running test case on script: `pip install -e . && pytest .` to install [starter](./starter/) module and execute pytest script.
+ Running test case on script: `pip install -e . && pytest .` to install test module and execute pytest script.
 
  ### API
  To launch the API, run: 
- `@`
- Access the provided link [link](@)to utilize the Swagger UI and test the API.
+ `https://census-project.onrender.com`
+ Access the provided link [link](https://census-project.onrender.com)to utilize the Swagger UI and test the API.
 
  **Check Render deployed API**
 - Running script: `python check_render_api.py`

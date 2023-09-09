@@ -175,7 +175,7 @@ async def get_items():
     return {"message": "Census Project  - Welcome to my page!"}
 
 
-@app.post("/")
+@app.post('/')
 async def predict(user_data: User):
     """Predict method"""
     logger.info(f"Received user data: {user_data}")
@@ -212,6 +212,7 @@ async def predict(user_data: User):
             " native-country",
         ],
     )
+    logger.info('Processing input user data ')
 
     # process input user data
     X, _, _, _ = process_data(
@@ -221,6 +222,8 @@ async def predict(user_data: User):
         lb=lb,
         training=False,
     )
+    logger.info('Getting predictions')
+
     # get the prediction
     pred = inference(model, X)
     logging.info(f"Prediction result: {pred}")
