@@ -2,27 +2,31 @@
 Render Api module test
 """
 import requests
-import json
 
+# Define the API endpoint
+endpoint = "https://census-project.onrender.com/"
 
+# Sample data for testing (adjust this as per your needs)
 data = {
-    " age": 29,
-    " hours_per_week": 70,
-    " workclass": "Private",
-    "education": "Some-college",
-    " marital_status": "Married-civ-spouse",
-    " occupation": "Exec-managerial",
-    " relationship": "Husband",
-    " race": "Black",
-    " sex": "Male",
-    " native_country": "United-States"
+    "age": 34,
+    "workclass": "Private",
+    "fnlgt": 77516,
+    "education": "Bachelors",
+    "education_num": 13,
+    "marital_status": "Never-married",
+    "occupation": "Adm-clerical",
+    "relationship": "Not-in-family",
+    "race": "White",
+    "sex": "Male",
+    "capital_gain": 0,
+    "capital_loss": 0,
+    "hours_per_week": 40,
+    "native_country": "United-States"
 }
 
-r = requests.post('https://census-project.onrender.com/', json=data)
+response = requests.post(endpoint, json=data)
 
+# Print the server response
+# print(response.json())
 
-print("Response code: %s" % r.status_code)
-print("Response body: %s" % r.json())
-
-# print("Response code: %s" % r.status_code)
-# print("Response body: %s" % r.json())
+print(response.text)
