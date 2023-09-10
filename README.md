@@ -34,7 +34,7 @@ other artifacts are saved to another designated path
  Access the provided link [link](https://census-project.onrender.com)to utilize the Swagger UI and test the API.
 
  **Check Render deployed API**
-- Running script: `python check_render_api.py`
+- Running script: `python render_api_test.py`
 - The stdout should be:
 ```bash
 Response 
