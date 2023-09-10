@@ -175,7 +175,7 @@ async def get_items():
     return {"message": "Census Project  - Welcome to my page!"}
 
 
-@app.post('/')
+@app.post("/")
 async def predict(user_data: User):
     """Predict method"""
     logger.info(f"Received user data: {user_data}")
