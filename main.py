@@ -169,6 +169,11 @@ def get_model():
 
     return model, encoder, lb
 
+import sys
+
+@app.get("/python-version")
+def get_python_version():
+    return {"Python Version": sys.version}
 
 @app.get("/")
 async def get_items():
