@@ -31,12 +31,11 @@ other artifacts are saved to another designated path
  ### API
  To launch the API, run: 
  `https://census-project.onrender.com`
- Access the provided link [link](https://census-project.onrender.com)to utilize the Swagger UI and test the API.
+ Access the provided link [link](https://census-project.onrender.com/)to utilize the Swagger UI and test the API.
 
  **Check Render deployed API**
 - Running script: `python render_api_test.py`
 - The stdout should be:
 ```bash
-Response 
-Response 
+{"prediction":"[0]","class_name":" <=50K","success":true}
 ```
