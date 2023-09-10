@@ -4,7 +4,8 @@ Render Api module test
 import requests
 
 # Define the API endpoint
-endpoint = "https://census-project.onrender.com/"
+# endpoint = "https://census-project.onrender.com/"
+endpoint = "http://127.0.0.1:8000/"
 
 # Sample data for testing (adjust this as per your needs)
 data = {
