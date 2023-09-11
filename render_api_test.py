@@ -31,3 +31,4 @@ response = requests.post(endpoint, json=data)
 # print(response.json())
 
 print(response.text)
+print("Response code: %s" % response.status_code)
