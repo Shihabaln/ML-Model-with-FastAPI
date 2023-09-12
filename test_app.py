@@ -52,7 +52,7 @@ def test_predict_1(test_client):
     )
     response = test_client.post("/", json=user_input.dict())
     assert response.status_code == 200
-    assert response.json()['class_name'] == " >50K"
+    assert response.json()['class_name'] == ">50K"
 
 
 def test_predict_2(test_client):
@@ -71,7 +71,7 @@ def test_predict_2(test_client):
     )
     response = test_client.post("/", json=user_input.dict())
     assert response.status_code == 200
-    assert response.json()['class_name'] == " <=50K"
+    assert response.json()['class_name'] == "<=50K"
 
 
 def test_predict_3(test_client):
