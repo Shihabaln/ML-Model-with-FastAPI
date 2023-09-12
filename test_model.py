@@ -33,14 +33,14 @@ def features():
     """
     Fixture - will return the categorical features as argument
     """
-    cat_features = [    " workclass",
+    cat_features = [    "workclass",
         "education",
-        " marital-status",
-        " occupation",
-        " relationship",
-        " race",
-        " sex",
-        " native-country"]
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "native-country"]
     return cat_features
 
 
@@ -52,12 +52,12 @@ def train_dataset(data, features):
     train, test = train_test_split( data, 
                                 test_size=0.20, 
                                 random_state=1, 
-                                stratify=data[' salary']
+                                stratify=data['salary']
                                 )
     X_train, y_train, encoder, lb = process_data(
                                             train,
                                             categorical_features=features,
-                                            label=" salary",
+                                            label="salary",
                                             training=True
                                         )
     return X_train, y_train
