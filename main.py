@@ -200,16 +200,16 @@ async def predict(user_data: User):
     temp_df = pd.DataFrame(
         data=array,
         columns=[
-            " age",
-            " hours-per-week",
-            " workclass",
+            "age",
+            "hours-per-week",
+            "workclass",
             "education",
-            " marital-status",
-            " occupation",
-            " relationship",
-            " race",
-            " sex",
-            " native-country",
+            "marital-status",
+            "occupation",
+            "relationship",
+            "race",
+            "sex",
+            "native-country",
         ],
     )
     logger.info('Processing input user data ')

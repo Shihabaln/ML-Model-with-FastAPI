@@ -3,7 +3,7 @@ ML Pipeline
 """
 # Importing necessary libraries and modules
 import argparse
-from ml import basic_cleaning, train_model, evaluate_model
+import basic_cleaning, train_model, evaluate_model
 
 # Importing necessary libraries and modules
 import logging

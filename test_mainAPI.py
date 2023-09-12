@@ -45,23 +45,19 @@ def test_inference_case1():
     assert r.status_code == 200
 
     # test prediction vs expected label
-    assert r.json()['class_name'] == " <=50K"
-
+    assert r.json()['class_name'] == "<=50K"
 
 def test_inference_case2():
     """
     Test model inference output for one case - POST
     """
-    sample =    {'age':55,
+    sample = {'age':55,
                 'workclass':"Private", 
                 'education':"Doctorate",
-                'education_num':16,
                 'marital_status':"Separated",
                 'occupation':"Exec-managerial",
                 'relationship':"Not-in-family",
                 'race':"Black",
-                "capital_gain": 0,
-                "capital_loss": 0,
                 'sex':"Male",
                 'hours_per_week':50,
                 'native_country':"United-States"
@@ -75,4 +71,4 @@ def test_inference_case2():
     assert r.status_code == 200
 
     # test prediction vs expected label
-    assert r.json()['class_name'] == ' <=50K'
+    assert r.json()['class_name'] == '>50K'

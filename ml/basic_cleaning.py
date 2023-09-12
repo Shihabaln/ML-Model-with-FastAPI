@@ -40,7 +40,24 @@ def save_data(df, output_path):
         logger.info(f"Data saved to {output_path}")
     except Exception as e:
         logger.error(f"Failed to save data: {e}")
+def strip_string_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Strip whitespaces from string columns.
 
+    Parameters:
+    - df (pd.DataFrame): Input data.
+
+    Returns:
+    - pd.DataFrame: Data with stripped string columns.
+    """
+    # Identify object columns
+    obj_cols = df.columns[df.dtypes == "object"]
+
+    # Strip whitespaces
+    for col in obj_cols:
+        df[col] = df[col].apply(lambda rows: rows.strip())
+    df.columns = df.columns.str.strip()
+    return df
 
 def run(
     args=None,
@@ -75,7 +92,8 @@ def run(
 
     except Exception as e:
         logger.error(e)
-
+    # deleting white spaces   
+    df = strip_string_columns(df)
     # Save the results to a CSV file
     logger.info("Saving preprocessing data to CSV")
 

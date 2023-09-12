@@ -63,7 +63,7 @@ def run(
             X_test, y_test, _, _ = process_data(
                 df_temp,
                 categorical_features=get_categorical_features(),
-                label=" salary",
+                label="salary",
                 encoder=encoder,
                 lb=lb,
                 training=False,
@@ -90,7 +90,7 @@ def run(
     _X_test, _y_test, _, _ = process_data(
         test,
         categorical_features=get_categorical_features(),
-        label=" salary",
+        label="salary",
         encoder=encoder,
         lb=lb,
         training=False,

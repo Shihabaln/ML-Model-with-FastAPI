@@ -12,6 +12,12 @@ The model aims to predict if an individual earns more than $50,000 annually. It 
 
 The model's architecture is stored in a pickle format in the designated model directory. 
 
+## Training Data
+Using 80 % of this data:` https: // archive.ics.uci.edu/ml/datasets/census+income` for training model.
+
+## Evaluation Data
+Using 20 % of this data: `https: // archive.ics.uci.edu/ml/datasets/census+income` for evaluating model
+
 ## Metrics
 The metrics evaluated were the f1, precision and recall, On the test set we achieve the following values:
 

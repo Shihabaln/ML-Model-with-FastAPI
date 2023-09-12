@@ -42,19 +42,19 @@ def run(
     train, _ = train_test_split(data, test_size=0.20)
 
     cat_features = [
-        " workclass",
+        "workclass",
         "education",
-        " marital-status",
-        " occupation",
-        " relationship",
-        " race",
-        " sex",
-        " native-country",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "native-country",
     ]
     X_train, y_train, encoder, lb = process_data(
         X=train,
         categorical_features=cat_features,
-        label=" salary",
+        label="salary",
         training=True,
     )
 
